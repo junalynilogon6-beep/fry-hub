@@ -1,1 +1,22 @@
 
+-- FRYY HUB V3: ANTI-TRAP WARNING
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function setupAntiTrap(character)
+    local root = character:WaitForChild("HumanoidRootPart")
+
+    root.Touched:Connect(function(hit)
+        if hit and hit.Name == "Trap" then
+            warn("FRYY HUB: TRAP DETECTED!")
+        end
+    end)
+end
+
+if player.Character then
+    setupAntiTrap(player.Character)
+end
+
+player.CharacterAdded:Connect(setupAntiTrap)
+
+print("FRYY HUB Anti-Trap Warning Enabled!")
